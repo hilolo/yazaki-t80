@@ -1,0 +1,367 @@
+<app-sidemenu>
+    
+</app-sidemenu>
+
+
+
+<div class="page-container ">
+  
+    
+    <app-navbar>
+    
+    </app-navbar>
+    
+
+
+
+    <div class="page-content-wrapper mb-5 ">
+        <div class="content ">
+
+          <div class="social-wrapper">
+            <div class="social " data-pages="social">
+              <!-- START JUMBOTRON -->
+              <div class="jumbotron" data-pages="parallax" data-social="cover">
+                <div class="cover-photo"
+                  style="background-image: url(&quot;https://www.yazaki-europe.com/fileadmin/user_upload/Startseite/sliderbild-innovative-partner.png&quot;); transform: translateY(0px);">
+  
+                </div>
+                <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
+                  <div class="inner" style="transform: translateY(0px); opacity: 1;">
+                    <div class="pull-bottom bottom-left ">
+  
+                      <h1 class="text-white no-margin titilenexsize"><span class="semi-bold titilenexsize">Front loading
+                          Cost - New Project</span> T80</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+ 
+            </div>
+           
+  
+          </div>
+         
+          
+          <div class="container">
+         
+            <div class="bg-white">
+                <div class="container">
+                  <ol class="breadcrumb breadcrumb-alt">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">costs</li>
+                 
+                  </ol>
+                
+                </div>
+              </div>
+
+
+              <div *ngIf="user">
+              <h5 class="font-montserrat text-uppercase semi-bold fs-18 m-l-35">Choose Which Department</h5>
+              <div class="container inserborder">
+                <div class="row">
+                  <div class="col">
+                    <div class="row m-t-20">
+      
+      
+                      <div class="col-lg-9">
+                        <div class="pull-left">
+                        
+                          <h5 class="no-margin semi-bold">T80 - Front loading</h5>
+      
+                          
+                        </div>
+      
+                      </div>
+                      <div class="col-lg-3 text-right border ">
+                        <h4 class="no-margin text-danger bold "> WEEK {{date.value |   date : 'w/yy' }}</h4>
+                        <p class="small text-danger bold "> {{date.value |   date : 'MMM y' }}</p>
+
+                        <mat-form-field>
+                          <mat-label >Date </mat-label>
+                          <input matInput   [matDatepicker]="picker1" [formControl]="date">
+                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>     
+                       
+                        
+                        
+                       
+
+                      </div>
+                    </div>
+      
+                    
+                    <div class="d-flex justify-content-center m-t-20 m-b-35 text-center">
+                      <div class="col-lg-1 col-md-1 ">
+
+                          <button mat-fab [ngClass]="{'rrr': user.type=='1'}" (click)="onClick('Production')"    color="warn">Production</button>      
+                      </div>
+                      <div class="col-lg-1 col-md-1 ">
+                          
+                        <button [ngClass]="{'rrr': user.type=='2'}" (click)="onClick('Quality')"    mat-fab color="warn">Quality</button>      
+                    </div>
+                    <div class="col-lg-1 col-md-1 ">
+
+                      <button [ngClass]="{'rrr': user.type=='3'}" (click)="onClick('Prototype')"   mat-fab color="warn">Prototype</button>      
+                  </div>
+                  <div class="col-lg-1 col-md-1 ">
+
+                    <button [ngClass]="{'rrr': user.type=='4'}" (click)="onClick('Maintenance')"    mat-fab color="warn">Maintenance </button>      
+                </div>
+                <div class="col-lg-1 col-md-1 ">
+
+                  <button [ngClass]="{'rrr': user.type=='5'}" (click)="onClick('Process')"    mat-fab color="warn">Process</button>      
+              </div>
+              <div class="col-lg-1 col-md-1 ">
+
+                <button [ngClass]="{'rrr': user.type=='6'}"  (click)="onClick('ENG')"  mat-fab color="warn">ENG</button>      
+            </div>
+            <div class="col-lg-1 col-md-1 ">
+
+              <button [ngClass]="{'rrr': user.type=='7'}" (click)="onClick('PLPP')"    mat-fab color="warn">PLPP</button>      
+          </div>
+
+          <div class="col-lg-1 col-md-1 ">
+          <button [ngClass]="{'rrr': user.type=='8'}" (click)="onClick('Logistique')"    mat-fab color="warn">Logistique</button>      
+        </div>
+
+        
+      
+                      
+      
+      
+                    </div>
+                  </div>
+      
+      
+      
+                  </div>
+      
+                </div>
+      
+      
+      
+              </div>
+
+              <div *ngIf="Department">
+
+              <h5 class="font-montserrat text-uppercase semi-bold fs-18 m-l-35">Insert Data</h5>
+              <div class="container inserborder">
+                <div class="row">
+                  <div class="col">
+                    <div class="row m-t-20">
+      
+      
+      
+                      <div class="col-lg-12 text-right border ">
+                        <div class="mr-2">
+                          <h4 class="no-margin text-danger bold ">{{Department}}</h4>
+                          <p class="small text-danger bold ">WEEK {{date.value |   date : 'w/yy' }}</p>
+                         
+                          
+                            <button type="button"   (click)='addInput()' class="btn btn-success pull-left m-3"><i class="fa fa-plus"></i>
+                            </button>
+                         
+                         
+                        
+                        </div>
+                      </div>
+      
+
+                          <div class="row">
+                            <form [formGroup]='formName'  #costform=ngForm (ngSubmit)="onSubmit()"  >
+                              <div formArrayName="controllerArray" >
+                                <div *ngFor="let item of formName.controls.controllerArray.controls; let i=index" [formGroupName]="i">
+                                
+                            <div class="col-lg-12   text-left">
+                              <!-- START card -->
+                           
+      
+                                    <div class="row p-3 m-3" style="border: 1px grey   dotted ;">
+                                      
+
+                                      
+                                      <div class="col-md-4">
+                                        <div class="form-group form-group-default  border border-primary">
+                                          <label>category  <i class="fa fa-info text-complete m-l-5"></i>
+                                            
+                                          
+                                            <select  formControlName="category"     class="form-control" >
+   
+                                              <option >Premium inbound</option>
+                                              <option  >Premium outbound</option>
+                                              <option  >Overtime</option>
+                                              <option  >Downtime</option>
+                                              <option  >Rework</option>
+                                              <option  >External Support</option>
+                                              <option  >Scrap validation</option>
+                                              <option  >Scrap Rework</option>
+                                              <option  >R@R</option>
+                                              <option  >Training</option>
+                                              <option  >Travels</option>
+                                            </select>
+
+                                        </label>
+                                        </div>
+                                      </div>
+
+
+      
+                                      <div class="col-md-2">
+                                        <div class="form-group form-group-default  border border-primary">
+                                          <label>Client  <i class="fa fa-info text-complete m-l-5"></i>
+                                            
+                                          
+                                            <select formControlName="Client"  class="form-control"  >
+   
+                                              <option value="NISSAN" >NISSAN</option>
+                                              <option value="PSA" >PSA</option>
+                                              <option value="RENAULT" >RENAULT</option>
+                                            </select>
+
+                                        </label>
+                                        </div>
+                                      </div>
+
+                                       
+                                          <div class="col-md-2">
+                                        <div    class="form-group form-group-default  border border-primary" style="height: 66px !important;"  >
+                                          <label>Projet <i class="fa fa-info text-complete m-l-5"></i>
+                                         
+                                            
+                                            <mat-form-field>
+                                              
+                                              <mat-select  formControlName="Projet"  >
+                                                
+                                                <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
+                                                              [disabled]="group.disabled">
+                                                  <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
+                                                    {{pokemon.viewValue}}
+                                                  </mat-option>
+                                                </mat-optgroup>
+                                              </mat-select>
+                                            </mat-form-field>
+                                          </label>
+
+               
+                                     
+                                        </div>
+                                      </div>
+      
+                                      <div class="col-md-3">
+                                        <div class="form-group form-group-default  border border-primary">
+                                          <label>responsibility <i class="fa fa-info text-complete m-l-5"></i>
+                                         
+                                         
+                                         
+                                            <select  formControlName="respon" class="form-control"  >
+
+                                              <option value="1"  >Interne</option>
+                                              <option value="0  " >Externe</option>
+                                            </select>
+
+                                        </label>
+                                        </div>
+                                      </div>
+
+                                       
+      
+                                      <div class="col-md-4">
+                                        <div class="form-group form-group-default input-group  border border-primary"  style="margin-left: -7px;"  >
+                                          <div class="form-input-group">
+                                            <label>Amount
+                                            <input formControlName="controlerInputName1"  type="number" class="form-control usd" aria-invalid="false" required ></label>
+                                          </div>
+                                          <div class="input-group-addon">
+                                            EURO
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-6">
+                                        <div class="form-group form-group-default  border border-primary">
+                                          <label>reason <i class="fa fa-info text-complete m-l-5"></i>
+                                         
+                                            <textarea formControlName="reason"   class="form-control"  rows="2"></textarea>
+
+                                        </label>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-2">
+                                      <button type="button"  (click)='removeInput(i)' class="btn btn-danger " style="width:54px;height: 54px;"><i class="fa fa-trash"></i>
+                                      </button>
+                                    </div>
+                                   
+
+
+
+                                   
+
+                                    </div>
+      
+   
+      
+                               
+                            </div>
+
+                            
+                            
+      
+      </div>
+                              </div>
+                              <div class="row"> 
+                                <div class="col-md-12 pull-right  m-3">
+                                  <button class="btn btn-default"><i class="pg-close"></i> Clear</button>
+                                  <button class="btn btn-success"  type="submit" [disabled]="!costform.valid"   >Submit</button>
+                                </div>
+                                </div>
+
+                            </form>
+      
+                          </div>
+
+                         
+
+                     
+      
+                     
+      
+      
+      
+      
+                
+                    </div>
+                  </div>
+      
+      
+      
+      
+      
+      
+      
+                </div>
+      
+
+
+             
+
+              </div>
+            </div>
+         
+        </div>
+          
+  
+  
+  
+        </div>
+  
+  
+  
+      </div>
+</div>
+
+
+
+

@@ -1,0 +1,155 @@
+
+  
+  <div class="container mat-elevation-z8">
+  
+    <div class="form">
+      <mat-form-field floatPlaceholder="never" color="warn">
+        <input matInput #filter placeholder="Filter per date">
+      </mat-form-field>
+    </div>
+  
+    <mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows   class="mat-cell">
+      ng update @angular/cli @angular/core
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="date_week">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>date_week </mat-header-cell>
+        <mat-cell *matCellDef="let row" >{{row.date_week}} {{ row.date_week | date : 'w/yy'}}   </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="users.name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>users</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.users.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="department">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.department}} </mat-cell>
+      </ng-container>
+  
+     
+      <ng-container matColumnDef="totalcoasts">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Costs Count</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.indivcosts.length  }} </mat-cell>
+      </ng-container>
+
+         
+      <ng-container matColumnDef="totalamount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Total Amount</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{calculateMealTotal(row.indivcosts)}} € </mat-cell>
+      </ng-container>
+
+      
+
+    
+   <!-- actions -->
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="warn" (click)="loaddata()">
+          <mat-icon aria-label="refresh">refresh</mat-icon>
+        </button>
+      </mat-header-cell>
+  
+      <mat-cell *matCellDef="let row; let i=index;">
+  
+        <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.email, row.name, row.type)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+  
+
+       <!-- Expanded Content Column - The detail row is made up of this one column -->
+       <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let row"> 
+
+          <div *ngIf="row.indivcosts.length != 0, else notShow" >  
+
+          <table class="table table-hover table-condensed dataTable no-footer" >
+            <thead>
+              <tr role="row">
+                <th style="width:15%;white-space: normal;"  tabindex="0" rowspan="1" colspan="1" >category</th>
+                
+                <th style="width: 10%;white-space: normal;"  tabindex="0"  rowspan="1" colspan="1">client</th>
+                <th style="width: 10%;white-space: normal;"  tabindex="0"  rowspan="1" colspan="1">projet</th>
+                <th style="width: 15%;white-space: normal;"  tabindex="0"  rowspan="1" colspan="1">amount </th>
+                <th style="white-space: normal;"  tabindex="0"  rowspan="1" colspan="1">reason</th>
+                <th   style="width: 10%;white-space: normal;"   tabindex="0"  rowspan="1" colspan="1">responsibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              
+              
+           
+      
+         
+            <tr *ngFor="let category of row.indivcosts"  role="row" class="even">
+                <td class="v-align-middle semi-bold sorting_1"> {{category.category}}  </td>
+              
+                <td class="v-align-middle semi-bold">{{category.client}}
+                </td>
+                <td class="v-align-middle semi-bold">{{category.projet}}
+                </td>
+                <td class="v-align-middle bold">{{category.amount}} €
+                </td>
+                <td class="v-align-middle semi-bold" style="white-space:normal;" > {{category.reason}}
+                </td>
+              
+                <td class="v-align-middle semi-bold"> 
+                  
+                  <div *ngIf="category.responsibility; else loggedOut">
+                    Interne
+                  </div>
+                  
+                  <ng-template #loggedOut>
+                 Externe
+                  </ng-template>
+
+
+                </td>
+              </tr>
+              
+        
+
+          
+          
+    
+
+      </tbody>
+    </table>
+
+  </div>
+  
+<ng-template #notShow>
+  <h2 class="name no-margin text-center">Data Not Found</h2>
+</ng-template>
+        </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+            matRipple 
+            class="element-row" 
+            [class.expanded]="expandedElement == row"
+            (click)="expandedElement = row"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+            [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'"
+            style="overflow: hidden"> 
+    </mat-row>
+    </mat-table>
+  
+  
+    <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+      No results
+    </div>
+  
+    <mat-paginator #paginator
+                   [length]="dataSource.filteredData.length"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>

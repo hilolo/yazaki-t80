@@ -1,0 +1,75 @@
+<div class="bg-white">
+  <div class="container">
+    <ol class="breadcrumb breadcrumb-alt">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active">Users</li>
+      <button class="btn btn-success btn-cons m-b-10 pull-right" (click)="addNew()" type="button"><i class="fa fa-cloud-upload"></i> <span > Add New User</span>
+      </button>
+    </ol>
+  
+  </div>
+</div>
+
+
+<div class="container mat-elevation-z8">
+
+  <div class="form">
+    <mat-form-field floatPlaceholder="never" color="warn">
+      <input matInput #filter placeholder="Filter User">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+    ng update @angular/cli @angular/core
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Registration Number</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.email}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="operation">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>type</mat-header-cell>
+      <mat-cell *matCellDef="let row">   {{row.type | typereformat }}</mat-cell>
+    </ng-container>
+    
+ <!-- actions -->
+  <!-- actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="warn" (click)="loaddata()">
+        <mat-icon aria-label="refresh">refresh</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i=index;">
+
+      <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.email, row.name, row.type)">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+    No results
+  </div>
+
+  <mat-paginator #paginator
+                 [length]="dataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>

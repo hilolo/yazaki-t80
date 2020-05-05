@@ -1,0 +1,178 @@
+<app-sidemenu>
+    
+</app-sidemenu>
+
+
+
+<div class="page-container ">
+  
+    
+    <app-navbar>
+    
+    </app-navbar>
+    
+
+
+
+    <div class="page-content-wrapper mb-5 ">
+        <div class="content ">
+
+          <div class="social-wrapper">
+            <div class="social " data-pages="social">
+              <!-- START JUMBOTRON -->
+              <div class="jumbotron" data-pages="parallax" data-social="cover">
+                <div class="cover-photo"
+                  style="background-image: url(&quot;https://www.yazaki-europe.com/fileadmin/user_upload/Startseite/sliderbild-innovative-partner.png&quot;); transform: translateY(0px);">
+  
+                </div>
+                <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
+                  <div class="inner" style="transform: translateY(0px); opacity: 1;">
+                    <div class="pull-bottom bottom-left ">
+  
+                      <h1 class="text-white no-margin titilenexsize"><span class="semi-bold titilenexsize">Front loading
+                          Cost - New Project</span> T80</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+ 
+            </div>
+           
+  
+          </div>
+         
+          
+          <div class="container">
+         
+            <div class="bg-white ">
+                <div class="container">
+                  <ol class="breadcrumb breadcrumb-alt">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                   
+                    <mat-form-field  class="pull-right"  >
+                      <mat-label>Select Year</mat-label>
+                      <mat-select [(ngModel)]="selectedDevice" (selectionChange)="doSomething($event)"    [(value)]="selected" > 
+                    
+                        <mat-option value="2020">2020</mat-option>
+                        <mat-option value="2019">2019</mat-option>
+                       
+                      </mat-select>
+                    </mat-form-field>
+                  
+                  </ol>
+           
+                 
+
+                
+                </div>
+              </div>
+             <div *ngIf="barChartData.length > 0" >
+              
+              <div class="container">
+                <div style="width: 100%;">
+                  <div style="width: 100%;">
+                    <canvas baseChart
+                    [datasets]="barChartData"
+                    height="100px"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [colors]="barChartColors"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                  </canvas>
+                </div>
+              </div>
+
+              
+            </div>
+
+          </div>
+
+          <div *ngIf="barChartData2.length > 0" >
+              
+            <div class="container">
+              <div style="width: 100%;">
+                <div style="width: 100%;">
+                  <canvas baseChart
+                  [datasets]="barChartData2"
+                  height="100px"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [colors]="barChartColors"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
+
+            
+          </div>
+
+        </div>
+
+
+          <div>
+              
+              <div class="container">
+                <div class="row">
+                <div class="col-lg-8"  *ngIf="chartData.length > 0"  >
+                
+               
+
+                <canvas
+                    baseChart
+                    height="120px"
+                    [chartType]="'line'"
+                    [datasets]="chartData"
+                    [labels]="chartLabels"
+                    [options]="chartOptions"
+                    [legend]="true"
+                    [colors]="barChartColors"
+                    (chartClick)="onChartClick($event)">
+                </canvas>
+           
+                </div>
+                <div class=" col-lg-3" *ngIf="pieChartData.length > 0"  > 
+                  <div class="chart">
+                    <canvas baseChart
+                      [data]="pieChartData"
+                      [labels]="pieChartLabels"
+                      [chartType]="pieChartType"
+                      [options]="pieChartOptions"
+                   height="150px" width="150px"
+                      [colors]="pieChartColors"
+                      [legend]="pieChartLegend">
+                    </canvas>
+                  </div>
+
+                </div>
+              </div>
+                
+              </div>
+  
+            </div>
+
+
+           
+          
+
+
+
+         
+        </div>
+          
+  
+  
+  
+        </div>
+  
+  
+  
+      </div>
+</div>
+
+
+
+
+<app-navbar [user]="user"  ></app-navbar>

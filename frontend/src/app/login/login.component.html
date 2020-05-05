@@ -1,0 +1,55 @@
+<div class="login-wrapper ">
+    <div class="bg-pic">
+        <img src="https://www.yazaki-europe.com/fileadmin/_processed_/3/4/csm_yazaki-supplier-headerbild_3623344b1d.jpg"
+            alt="" class="lazy" />
+
+        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
+            <p class="small">
+                images Displayed are solely for representation purposes only, All
+                pictures copyright of respective owner © 2020 YAZAKI.
+            </p>
+        </div>
+    </div>
+
+    <div class="login-container bg-white">
+        <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
+            <img src="https://www.yazaki-europe.com/typo3conf/ext/typo3sz_assets/Resources/Default/Public/Images/logo.png"
+                alt="logo" data-src="assets/img/logo.png" width="180" height="22" />
+
+            <p class="p-t-35">Sign into your dashboard</p>
+
+            <form id="form-login" class="p-t-15" #loginForm=ngForm (ngSubmit)="onSubmit()" >
+                <div class="alert alert-danger" [hidden]="!error">
+                    {{error}}
+                  </div>
+
+                <div class="form-group form-group-default">
+                    <label>Registration number</label>
+                    <div class="controls">
+                        <input type="email" name="email"   [(ngModel)]="form.email" class=" border border-primary" required />
+                    </div>
+                </div>
+
+                <div class="form-group form-group-default">
+                    <label>Password</label>
+                    <div class="controls">
+                        <input  type="password" name="password"   [(ngModel)]="form.password" type="password" class="border border-primary" name="password" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 no-padding sm-p-l-10">
+                        <div class="checkbox ">
+                            <input type="checkbox" value="1" id="checkbox1" />
+                            <label for="checkbox1">Keep Me Signed in</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-cons m-t-10" type="submit" [disabled]="!loginForm.valid" >
+                    Sign in
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
